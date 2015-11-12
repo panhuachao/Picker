@@ -4,7 +4,6 @@
 
 ## 具体效果
 见[saiwu-bigkoo/Android-PickerView](https://github.com/saiwu-bigkoo/Android-PickerView) 
-部分如下：
+部分如下：<br />
 ![](https://github.com/saiwu-bigkoo/PickerView/blob/master/preview/pickerdemo.gif)
-![](https://github.com/saiwu-bigkoo/Android-PickerView/blob/master/preview/pickerdemo_zhangshangshenghuo.gif)
 
