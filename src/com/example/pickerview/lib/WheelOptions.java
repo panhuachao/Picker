@@ -6,7 +6,11 @@ import com.example.pickerview.R;
 
 import android.view.View;
 
-
+/***
+ * 滑动选择
+ * @author panhuachao
+ * 第一列一维数组，第二列二维数组，第三列三维数组(三级联动)
+ */
 public class WheelOptions {
 	private View view;
 	private WheelView wv_option1;
@@ -31,7 +35,7 @@ public class WheelOptions {
 		this.view = view;
 		setView(view);
 	}
-
+	
 	public void setPicker(ArrayList<String> optionsItems) {
 		setPicker(optionsItems, null, null, false);
 	}

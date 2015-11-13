@@ -9,6 +9,7 @@ import java.util.Date;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 
+import com.example.pickerview.lib.AddressReadUtils;
 import com.example.pickerview.lib.OptionsPopupWindow;
 import com.example.pickerview.lib.TimePopupWindow;
 import com.example.pickerview.lib.TimePopupWindow.OnTimeSelectListener;
@@ -18,6 +19,7 @@ import com.example.pickerview.lib.XmlParserHandler;
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.res.AssetManager;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.View;
@@ -62,72 +64,17 @@ public class MainActivity extends Activity {
 
         //选项选择器
         pwOptions = new OptionsPopupWindow(this);
-        AssetManager asset = getAssets();
-        InputStream input;
-		try {
-			input = asset.open("province_data.xml");
-			SAXParserFactory spf = SAXParserFactory.newInstance();
-			// ����xml
-			SAXParser parser = spf.newSAXParser();
-			XmlParserHandler handler = new XmlParserHandler();
-			parser.parse(input, handler);
-			input.close();
-			// ��ȡ�������������
-			options1Items = handler.getProviceList();
-			options2Items=handler.getCityList();
-			options3Items=handler.getDistrictList();
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-        //选项1
-//        options1Items.add("广东省");
-//        //options1Items.add("湖南省");
-//
-//        //选项2
-//        ArrayList<String> options2Items_01=new ArrayList<String>();
-//        options2Items_01.add("广州市");
-//        options2Items_01.add("佛山市");
-//        options2Items_01.add("东莞市");
-//        ArrayList<String> options2Items_02=new ArrayList<String>();
-//        options2Items_02.add("长沙");
-//        options2Items_02.add("岳阳");
-//        options2Items.add(options2Items_01);
-//        options2Items.add(options2Items_02);
-//
-//        //选项3
-//        ArrayList<ArrayList<String>> options3Items_01 = new ArrayList<ArrayList<String>>();
-//        ArrayList<ArrayList<String>> options3Items_02 = new ArrayList<ArrayList<String>>();
-//        ArrayList<String> options3Items_01_01=new ArrayList<String>();
-//        options3Items_01_01.add("白云区");
-//        options3Items_01_01.add("天河区");
-//        options3Items_01_01.add("海珠区");
-//        options3Items_01_01.add("经济开发区");
-//        options3Items_01_01.add("越秀区");
-//        options3Items_01.add(options3Items_01_01);
-//        ArrayList<String> options3Items_01_02=new ArrayList<String>();
-//        options3Items_01_02.add("南海");
-//        options3Items_01.add(options3Items_01_02);
-//        ArrayList<String> options3Items_01_03=new ArrayList<String>();
-//        options3Items_01_03.add("常平");
-//        options3Items_01_03.add("虎门");
-//        options3Items_01.add(options3Items_01_03);
-//
-//        ArrayList<String> options3Items_02_01=new ArrayList<String>();
-//        options3Items_02_01.add("长沙1");
-//        options3Items_02.add(options3Items_02_01);
-//        ArrayList<String> options3Items_02_02=new ArrayList<String>();
-//        options3Items_02_02.add("岳1");
-//        options3Items_02.add(options3Items_02_02);
-//
-//        options3Items.add(options3Items_01);
-//        options3Items.add(options3Items_02);
-
+        AddressReadUtils addressUtils=new AddressReadUtils();
+        addressUtils.readXML(this);
+        options1Items=addressUtils.getProviceList();
+        options2Items=addressUtils.getCityList();
+        options3Items=addressUtils.getDistrictList();
+        
+        Log.i("options1Items length", options1Items.size()+"");
         //三级联动效果
         pwOptions.setPicker(options1Items, options2Items, options3Items, true);
         //设置选择的三级单位
-        //pwOptions.setLabels("省", "市", "区");
-        pwOptions.setLabels("", "", "");
+        //pwOptions.setLabels("省", "市", "区")
         //设置默认选中的三级项目
         pwOptions.setSelectOptions(0, 0, 0);
         //监听确定选择按钮

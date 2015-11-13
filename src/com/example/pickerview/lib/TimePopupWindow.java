@@ -43,7 +43,7 @@ public class TimePopupWindow extends PopupWindow implements OnClickListener {
 		this.setAnimationStyle(R.style.timepopwindow_anim_style);
 
 		LayoutInflater mLayoutInflater = LayoutInflater.from(context);
-		rootView = mLayoutInflater.inflate(R.layout.pw_time, null);
+		rootView = mLayoutInflater.inflate(R.layout.control_pw_time, null);
 		// -----确定和取消按钮
 		btnSubmit = rootView.findViewById(R.id.btnSubmit);
 		btnSubmit.setTag(TAG_SUBMIT);
